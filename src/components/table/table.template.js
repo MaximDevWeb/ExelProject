@@ -28,7 +28,7 @@ function createCol(col) {
 /**
  * Функция отрисовки строки
  * @param {string} content
- * @param {string} row
+ * @param {string | number} row
  * @return {string}
  */
 function createRow(content, row = '') {
@@ -74,7 +74,7 @@ export function createTable(rowsCount = 15) {
 			.map(createCell)
 			.join('');
 
-		rows.push(createRow(cells, row.toString()));
+		rows.push(createRow(cells, row));
 	}
 
 	return rows.join('');
