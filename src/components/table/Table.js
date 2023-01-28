@@ -12,6 +12,6 @@ export class Table extends ExcelComponent {
    * @return {string}
    */
 	toHtml() {
-		return createTable();
+		return createTable(30);
 	}
 }
