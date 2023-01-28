@@ -10,5 +10,9 @@ module.exports = {
         node: true,
         es6: true
     },
-    extends: ['eslint:recommended', 'google']
+    extends: ['eslint:recommended', 'google'],
+    rules: {
+        indent: [2, "tab"],
+        "no-tabs": 0
+    }
 };
