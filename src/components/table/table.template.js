@@ -21,7 +21,10 @@ function createCell(cell) {
  */
 function createCol(col) {
 	return `
-    <div class="column">${col}</div>
+    <div class="column">
+			${col}
+			<div class="col-resize" data-resize="col"></div>
+		</div>
   `;
 }
 
@@ -32,9 +35,14 @@ function createCol(col) {
  * @return {string}
  */
 function createRow(content, row = '') {
+	const resize = row ? '<div class="row-resize" data-resize="row"></div>' : '';
+
 	return `
     <div class="row">
-      <div class="row-info">${row}</div>
+      <div class="row-info">
+				${row}
+				${resize}
+			</div>
       <div class="row-data">${content}</div>
     </div>
   `;
