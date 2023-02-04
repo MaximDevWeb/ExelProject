@@ -75,6 +75,16 @@
         &:hover {
             opacity: 1;
         }
+
+        &_visible {
+            opacity: 1;
+
+            &:before {
+                content: "";
+                position: absolute;
+                background-color: variables.$primary-color;
+            }
+        }
     }
 
     .col-resize {
@@ -84,6 +94,15 @@
         &:hover {
             cursor: col-resize;
         }
+
+        &_visible {
+            &:before {
+                right: 0;
+                top: 0;
+                width: 1px;
+                bottom: -20000px;
+            }
+        }
     }
 
     .row-resize {
@@ -92,6 +111,15 @@
 
         &:hover {
             cursor: row-resize;
+        }
+
+        &_visible {
+            &:before {
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                right: -20000px;
+            }
         }
     }
 }

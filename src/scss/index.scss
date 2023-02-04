@@ -18,6 +18,14 @@ body {
     font-size: 12px;
 }
 
+.cursor__resize_col {
+    cursor: col-resize;
+}
+
+.cursor__resize_row {
+    cursor: row-resize;
+}
+
 .excel {
     position: relative;
     color: #888;

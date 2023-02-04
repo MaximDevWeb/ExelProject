@@ -10,6 +10,9 @@ class Dom {
 		this.$el = typeof selector === 'string' ?
 			document.querySelector(selector) :
 			selector;
+
+		this.dataset = this.$el.dataset;
+		this.classList = this.$el.classList;
 	}
 
 	/**
@@ -71,6 +74,37 @@ class Dom {
 		this.$el.removeEventListener(eventType, callback);
 
 		return this;
+	}
+
+	/**
+	 * Get parent node
+	 * @param {string} selector
+	 * @return {Dom|HTMLElement}
+	 */
+	closest(selector) {
+		return $(this.$el.closest(selector));
+	}
+
+	/**
+	 * Get coords element
+	 * @return {DOMRect}
+	 */
+	getCoords() {
+		return this.$el.getBoundingClientRect();
+	}
+
+	/**
+	 * Get/set element width
+	 * @param {number|null} value
+	 * @return {string|Dom}
+	 */
+	width(value = null) {
+		if (value) {
+			this.$el.style.width = value + 'px';
+			return this;
+		} else {
+			return this.$el.style.width;
+		}
 	}
 }
 

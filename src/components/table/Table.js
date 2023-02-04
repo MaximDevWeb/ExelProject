@@ -1,5 +1,6 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from '@/components/table/table.template';
+import {$} from '@core/dom';
 
 /**
  * Class Table component
@@ -30,11 +31,29 @@ export class Table extends ExcelComponent {
 	 */
 	onMousedown(event) {
 		if (event.target.dataset.resize) {
-			const $target = event.target;
-			const start = $target.getBoundingClientRect().x;
+			const $target = $(event.target);
+			const $parent = $target.closest('[data-type="resizable"]');
+			const coords = $parent.getCoords();
 
 			document.onmousemove = (e) => {
-				console.log(e.x - start);
+				const delta = e.pageX - coords.right;
+				const value = coords.width + delta;
+				const key = $parent.dataset.index;
+				const $colElement = document.querySelectorAll(`[data-y-key="${key}"]`);
+
+				$target.classList.add('col-resize_visible');
+				document.body.classList.add('cursor__resize_col');
+
+				$parent.width(value);
+				$colElement.forEach((col) => {
+					$(col).width(value);
+				});
+			};
+
+			document.onmouseup = () => {
+				$target.classList.remove('col-resize_visible');
+				document.body.classList.remove('cursor__resize_col');
+				document.onmousemove = null;
 			};
 		}
 	}
