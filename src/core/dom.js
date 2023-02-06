@@ -94,17 +94,44 @@ class Dom {
 	}
 
 	/**
-	 * Get/set element width
-	 * @param {number|null} value
-	 * @return {string|Dom}
+	 * Set element width
+	 * @param {string} value
 	 */
-	width(value = null) {
-		if (value) {
-			this.$el.style.width = value + 'px';
-			return this;
-		} else {
-			return this.$el.style.width;
-		}
+	set width(value) {
+		this.$el.style.width = value + 'px';
+	}
+
+	/**
+	 * Get element width
+	 * @return {string}
+	 */
+	get width() {
+		return this.$el.style.width;
+	}
+
+	/**
+	 * Set element height
+	 * @param {string} value
+	 */
+	set height(value) {
+		this.$el.style.height = value + 'px';
+	}
+
+	/**
+	 * Get element height
+	 * @return {string}
+	 */
+	get height() {
+		return this.$el.style.height;
+	}
+
+	/**
+	 * Get elements to selector
+	 * @param {string} selector
+	 * @return {NodeListOf<*>}
+	 */
+	findAll(selector) {
+		return this.$el.querySelectorAll(selector);
 	}
 }
 

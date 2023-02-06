@@ -10,7 +10,7 @@ const CODES = {
  */
 function createCell(cell) {
 	return `
-    <div class="cell" contenteditable data-y-key="${cell}"></div>
+    <div class="cell" contenteditable data-col="${cell}"></div>
   `;
 }
 
@@ -21,7 +21,7 @@ function createCell(cell) {
  */
 function createCol(col) {
 	return `
-    <div class="column" data-type="resizable" data-index="${col}">
+    <div class="column" data-type="resizable" data-col="${col}">
 			${col}
 			<div class="col-resize" data-resize="col"></div>
 		</div>
@@ -38,7 +38,7 @@ function createRow(content, row = '') {
 	const resize = row ? '<div class="row-resize" data-resize="row"></div>' : '';
 
 	return `
-    <div class="row">
+    <div class="row" data-type="resizable" data-row="${row}">
       <div class="row-info">
 				${row}
 				${resize}

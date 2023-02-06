@@ -32,45 +32,52 @@ export class Table extends ExcelComponent {
 	onMousedown(event) {
 		if (event.target.dataset.resize) {
 			const $target = $(event.target);
+			const $targetResizeType = $target.dataset.resize;
 			const $parent = $target.closest('[data-type="resizable"]');
 			const coords = $parent.getCoords();
 
+			let value = 0;
+			let cursorType = '';
+			let targetType = '';
+
+
+			if ($targetResizeType === 'col') {
+				cursorType = 'cursor__resize_col';
+				targetType = 'col-resize_visible';
+			} else {
+				cursorType = 'cursor__resize_row';
+				targetType = 'row-resize_visible';
+			}
+
+			document.body.classList.add(cursorType);
+			$target.classList.add(targetType);
+
 			document.onmousemove = (e) => {
-				const delta = e.pageX - coords.right;
-				const value = coords.width + delta;
-				const key = $parent.dataset.index;
-				const $colElement = document.querySelectorAll(`[data-y-key="${key}"]`);
-
-				$target.classList.add('col-resize_visible');
-				document.body.classList.add('cursor__resize_col');
-
-				$parent.width(value);
-				$colElement.forEach((col) => {
-					$(col).width(value);
-				});
+				if ($targetResizeType === 'col') {
+					const delta = e.x - coords.right;
+					value = coords.width + delta;
+					$parent.width = value;
+				} else {
+					const delta = e.y - coords.bottom;
+					value = coords.height + delta;
+					$parent.height = value;
+				}
 			};
 
 			document.onmouseup = () => {
-				$target.classList.remove('col-resize_visible');
-				document.body.classList.remove('cursor__resize_col');
+				if ($targetResizeType === 'col') {
+					const key = $parent.dataset.col;
+					const $cells = this.$root.findAll(`[data-col="${key}"]`);
+
+					$cells.forEach((col) => {
+						$(col).width = value;
+					});
+				}
+
+				$target.classList.remove(targetType);
+				document.body.classList.remove(cursorType);
 				document.onmousemove = null;
 			};
 		}
 	}
-
-	// /**
-	//  * onMousemove event method
-	//  * @param {Event} event
-	//  */
-	// onMousemove(event) {
-	// 	console.log('mouse move event', event);
-	// }
-	//
-	// /**
-	//  * onMouseup event method
-	//  * @param {Event} event
-	//  */
-	// onMouseup(event) {
-	// 	console.log('mouse up event', event);
-	// }
 }
