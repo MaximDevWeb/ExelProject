@@ -55,12 +55,16 @@ export class Table extends ExcelComponent {
 			document.onmousemove = (e) => {
 				if ($targetResizeType === 'col') {
 					const delta = e.x - coords.right;
-					value = coords.width + delta;
-					$parent.width = value;
+					value = coords.width + delta + 'px';
+					$parent.css({
+						width: value,
+					});
 				} else {
 					const delta = e.y - coords.bottom;
-					value = coords.height + delta;
-					$parent.height = value;
+					value = coords.height + delta + 'px';
+					$parent.css({
+						height: value,
+					});
 				}
 			};
 
@@ -70,7 +74,9 @@ export class Table extends ExcelComponent {
 					const $cells = this.$root.findAll(`[data-col="${key}"]`);
 
 					$cells.forEach((col) => {
-						$(col).width = value;
+						$(col).css({
+							width: value,
+						});
 					});
 				}
 

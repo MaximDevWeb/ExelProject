@@ -133,6 +133,19 @@ class Dom {
 	findAll(selector) {
 		return this.$el.querySelectorAll(selector);
 	}
+
+	/**
+	 * Set style by style object
+	 * @param {Object} style
+	 * @return {Dom}
+	 */
+	css(style) {
+		for (const [key, value] of Object.entries(style)) {
+			this.$el.style[key] = value;
+		}
+
+		return this;
+	}
 }
 
 /**
