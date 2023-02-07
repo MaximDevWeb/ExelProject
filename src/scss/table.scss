@@ -17,6 +17,7 @@
     }
 
     .row-info {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -32,6 +33,7 @@
     }
 
     .column {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -58,8 +60,66 @@
 
         &.selected {
             border-color: transparent;
-            box-shadow: 0 0 0 2px #3c74ff;
+            box-shadow: 0 0 0 2px variables.$primary-color;
             z-index: 2;
+        }
+    }
+
+    .col-resize, .row-resize {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: variables.$primary-color;
+        opacity: 0;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &_visible {
+            opacity: 1;
+
+            &:before {
+                content: "";
+                position: absolute;
+                background-color: variables.$primary-color;
+            }
+        }
+    }
+
+    .col-resize {
+        top: 0;
+        width: 4px;
+
+        &:hover {
+            cursor: col-resize;
+        }
+
+        &_visible {
+            &:before {
+                right: 0;
+                top: 0;
+                width: 1px;
+                bottom: -5000px;
+            }
+        }
+    }
+
+    .row-resize {
+        left: 0;
+        height: 4px;
+
+        &:hover {
+            cursor: row-resize;
+        }
+
+        &_visible {
+            &:before {
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                right: -5000px;
+            }
         }
     }
 }

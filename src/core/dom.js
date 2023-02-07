@@ -10,6 +10,9 @@ class Dom {
 		this.$el = typeof selector === 'string' ?
 			document.querySelector(selector) :
 			selector;
+
+		this.dataset = this.$el.dataset;
+		this.classList = this.$el.classList;
 	}
 
 	/**
@@ -69,6 +72,77 @@ class Dom {
 	 */
 	off(eventType, callback) {
 		this.$el.removeEventListener(eventType, callback);
+
+		return this;
+	}
+
+	/**
+	 * Get parent node
+	 * @param {string} selector
+	 * @return {Dom|HTMLElement}
+	 */
+	closest(selector) {
+		return $(this.$el.closest(selector));
+	}
+
+	/**
+	 * Get coords element
+	 * @return {DOMRect}
+	 */
+	getCoords() {
+		return this.$el.getBoundingClientRect();
+	}
+
+	/**
+	 * Set element width
+	 * @param {string} value
+	 */
+	set width(value) {
+		this.$el.style.width = value + 'px';
+	}
+
+	/**
+	 * Get element width
+	 * @return {string}
+	 */
+	get width() {
+		return this.$el.style.width;
+	}
+
+	/**
+	 * Set element height
+	 * @param {string} value
+	 */
+	set height(value) {
+		this.$el.style.height = value + 'px';
+	}
+
+	/**
+	 * Get element height
+	 * @return {string}
+	 */
+	get height() {
+		return this.$el.style.height;
+	}
+
+	/**
+	 * Get elements to selector
+	 * @param {string} selector
+	 * @return {NodeListOf<*>}
+	 */
+	findAll(selector) {
+		return this.$el.querySelectorAll(selector);
+	}
+
+	/**
+	 * Set style by style object
+	 * @param {Object} style
+	 * @return {Dom}
+	 */
+	css(style) {
+		for (const [key, value] of Object.entries(style)) {
+			this.$el.style[key] = value;
+		}
 
 		return this;
 	}
