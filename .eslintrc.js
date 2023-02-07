@@ -14,6 +14,5 @@ module.exports = {
 	rules: {
 		'indent': [2, 'tab'],
 		'no-tabs': 0,
-		'guard-for-in': 0,
 	},
 };
